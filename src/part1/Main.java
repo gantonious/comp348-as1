@@ -22,8 +22,9 @@ public class Main {
         try {
             runProgram(args);
         } catch (Exception e) {
-            System.err.print(e.getMessage());
-            System.out.print("Usage: java MyPooledWeblog logname option");
+            System.err.println(e.getMessage());
+            System.out.println("Usage: java MyPooledWeblog logname option");
+            System.exit(1);
         }
     }
 

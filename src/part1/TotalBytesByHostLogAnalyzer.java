@@ -10,6 +10,9 @@ import java.util.Map;
 public class TotalBytesByHostLogAnalyzer implements ILogAnalyzer {
     private PrintStream outputPrintStream;
 
+    public TotalBytesByHostLogAnalyzer(PrintStream outputPrintStream) {
+        this.outputPrintStream = outputPrintStream;
+    }
 
     @Override
     public void analyzeWebLog(WebLog webLog) {
