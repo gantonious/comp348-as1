@@ -18,6 +18,6 @@ public class TotalBytesTransmittedLogAnalyzer implements ILogAnalyzer {
                 .map(w -> w.getBytesTransmitted())
                 .reduce(0, (sum, nextBytesTransmitted) -> sum + nextBytesTransmitted);
 
-        outputPrintStream.println(String.format("Total bytes transmitted: %d byte(s)."));
+        outputPrintStream.println(String.format("Total bytes transmitted: %d byte(s).", totalBytesTransmitted));
     }
 }
