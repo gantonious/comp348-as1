@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by George on 2017-12-26.
@@ -55,8 +57,24 @@ public class Main {
 
     private static void displayFilteredLines(List<String> filteredLines, String filter) {
         for (String line : filteredLines) {
-            System.out.println(line);
+            System.out.println(highlightFilterWordIn(line, filter));
         }
+    }
+
+    public static String highlightFilterWordIn(String line, String filter) {
+        Pattern filterPattern = Pattern.compile(filter);
+        Matcher filterMatcher = filterPattern.matcher(line);
+
+        while (filterMatcher.find()) {
+            int startIndex = filterMatcher.start();
+            int endIndex = filterMatcher.end();
+
+            line = line.substring(0, startIndex) + "\033[31m" +
+                    line.substring(startIndex, endIndex + 1) + "\033[0m" +
+                    line.substring(endIndex + 1);
+        }
+
+        return line;
     }
 
     private static String getUrlFrom(String[] args) {
