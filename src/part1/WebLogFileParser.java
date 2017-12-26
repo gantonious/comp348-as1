@@ -31,16 +31,16 @@ public class WebLogFileParser {
     }
 
     private WebLogEntry parseWebLogFileLine(String line) {
-        List<String> spaceSeparatedLine = StringUtils.splitOnSpacesUnlessInQuotes(line);
-        String hostname = spaceSeparatedLine.get(0);
-        int bytesTransmitted = Integer.parseInt(spaceSeparatedLine.get(7));
+        String[] spaceSeparatedLine = line.split(" ");
+        String hostname = spaceSeparatedLine[0];
+        int bytesTransmitted = Integer.parseInt(spaceSeparatedLine[9]);
 
         return new WebLogEntry(hostname, bytesTransmitted);
     }
 
     public static class ParsingException extends RuntimeException {
         public ParsingException(Exception innerException) {
-            super("Failed to parse web log filed because of: " + innerException.getLocalizedMessage());
+            super("Failed to parse web log filed because of: " + innerException.getMessage());
         }
     }
 }
