@@ -30,26 +30,38 @@ public class WebLogFileParser {
     }
 
     private WebLog tryToParseWebLogFile(InputStream webLogInputStream) throws Exception {
+        List<Future<WebLogEntry>> futureWebLogEntries = startParsing(webLogInputStream);
+        List<WebLogEntry> webLogEntries = retrieveWebLogEntriesFrom(futureWebLogEntries);
+        return new WebLog(webLogEntries);
+    }
+
+    private List<Future<WebLogEntry>> startParsing(InputStream webLogInputStream) throws Exception {
+        List<Future<WebLogEntry>> futureWebLogEntries = new ArrayList<>();
+
         InputStreamReader inputStreamReader = new InputStreamReader(webLogInputStream);
         BufferedReader inReader = new BufferedReader(inputStreamReader);
 
-        List<Future<WebLogEntry>> webLogResults = new ArrayList<>();
-        List<WebLogEntry> webLogEntries = new ArrayList<>();
-
         for (String nextLine = inReader.readLine(); nextLine != null; nextLine = inReader.readLine()) {
-            Future<WebLogEntry> webLogFuture = executorService.submit(new ParsingTask(nextLine));
-            webLogResults.add(webLogFuture);
+            Future<WebLogEntry> webLogEntryFuture = executorService.submit(new ParsingTask(nextLine));
+            futureWebLogEntries.add(webLogEntryFuture);
         }
 
-        for (Future<WebLogEntry> webLogEntryFuture: webLogResults) {
+        return futureWebLogEntries;
+    }
+
+    private List<WebLogEntry> retrieveWebLogEntriesFrom(List<Future<WebLogEntry>> futureWebLogEntries) {
+        List<WebLogEntry> webLogEntries = new ArrayList<>();
+
+        for (Future<WebLogEntry> webLogEntryFuture: futureWebLogEntries) {
             try {
                 webLogEntries.add(webLogEntryFuture.get());
             } catch (Exception e) {
-                // no-op
+                // if we fail to parse a line we just won't include it in
+                // representation of the web log
             }
         }
 
-        return new WebLog(webLogEntries);
+        return webLogEntries;
     }
 
     public static class ParsingTask implements Callable<WebLogEntry> {
