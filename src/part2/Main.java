@@ -62,16 +62,26 @@ public class Main {
     }
 
     public static String highlightFilterWordIn(String line, String filter) {
+        return highlightFilterWordIn(line, filter, 0);
+    }
+
+    public static String highlightFilterWordIn(String line, String filter, int startFrom) {
         Pattern filterPattern = Pattern.compile(filter);
         Matcher filterMatcher = filterPattern.matcher(line);
 
-        while (filterMatcher.find()) {
+        String startRedSequence = "\033[31m";
+        String endRedSequence = "\033[0m";
+
+        if (filterMatcher.find(startFrom)) {
             int startIndex = filterMatcher.start();
             int endIndex = filterMatcher.end();
+            int nextStartIndex = endIndex + startRedSequence.length() + endRedSequence.length();
 
-            line = line.substring(0, startIndex) + "\033[31m" +
-                    line.substring(startIndex, endIndex + 1) + "\033[0m" +
-                    line.substring(endIndex + 1);
+            line = line.substring(0, startIndex) + startRedSequence +
+                    line.substring(startIndex, endIndex) + endRedSequence +
+                    line.substring(endIndex);
+            
+            return highlightFilterWordIn(line, filter, nextStartIndex);
         }
 
         return line;
