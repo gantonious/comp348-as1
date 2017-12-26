@@ -46,6 +46,8 @@ public class WebLogFileParser {
             futureWebLogEntries.add(webLogEntryFuture);
         }
 
+        inReader.close();
+
         return futureWebLogEntries;
     }
 
