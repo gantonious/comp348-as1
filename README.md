@@ -17,7 +17,7 @@ make
 ### Usage
 
 ```bash
-java MyPooledWebLog web_log_file_name stats_option
+make runMyPooledWebLog WEB_LOG_PATH=[web_log_file_name] STATS_OPTION=[stats_option]
 ```
 
 ### Parameters
@@ -45,12 +45,12 @@ It accepts a weblog and can run any procedure on it. For this assignment three d
 
 The main file then creates `Map` that maps the different command line arugements to the different log analyzer implementations. This would allow this program to be expanded to analyze different stats in the web log such as percentage of server errors (i.e HTTP 500) when handling requests.
 
-## Part 2: SourveViewer
+## Part 2: SourceViewer
 
 ### Usage
 
 ```bash
-java SourceViewer url filter
+make runSourveViewer URL=[url]] FILTER=[filter]
 ```
 
 ### Parameters

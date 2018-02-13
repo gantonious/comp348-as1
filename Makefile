@@ -7,6 +7,11 @@ PART1_MAIN = ./src/part1/Main.java
 PART2_MAIN = ./src/part2/Main.java
 REGISTER_MAIN = ./src/filetransfer/RegisterUserMain.java
 
+WEB_LOG_PATH =
+STATS_OPTION =
+URL =
+FILTER =
+
 all: java
 
 java:
@@ -14,10 +19,11 @@ java:
 	javac -sourcepath $(SOURCE_PATH) -d $(OUTPUT_PATH) $(PART1_MAIN) $(PART2_MAIN)
 
 runMyPooledWebLog:
-	@java -classpath $(OUTPUT_PATH) part1.Main $^
+	@java -classpath $(OUTPUT_PATH) part1.Main $(WEB_LOG_PATH) $(STATS_OPTION)
+
 
 runSourveViewer:
-	@java -classpath $(OUTPUT_PATH) part2.Main http://www.antonious.ca George
+	@java -classpath $(OUTPUT_PATH) part2.Main $(URL) $(FILTER)
 
 clean:
 	rm -rf $(OUTPUT_PATH)
