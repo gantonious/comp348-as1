@@ -50,7 +50,7 @@ The main file then creates `Map` that maps the different command line arugements
 ### Usage
 
 ```bash
-make runSourveViewer URL=[url]] FILTER=[filter]
+make runSourceViewer URL=[url] FILTER=[filter]
 ```
 
 ### Parameters

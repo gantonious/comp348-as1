@@ -22,7 +22,7 @@ runMyPooledWebLog:
 	@java -classpath $(OUTPUT_PATH) part1.Main $(WEB_LOG_PATH) $(STATS_OPTION)
 
 
-runSourveViewer:
+runSourceViewer:
 	@java -classpath $(OUTPUT_PATH) part2.Main $(URL) $(FILTER)
 
 clean:
