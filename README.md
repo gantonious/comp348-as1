@@ -4,6 +4,11 @@ I declare that this assignment is my own work and that all material previously w
 
 Submitted by: George Antonious (3364768)
 
+## Assumptions
+
+- The code and Makefile was written and tested on Mac OS X
+- The weblog files follow the format used in example_log.txt
+
 ## Building Instructions
 
 Assuming JDK 1.8 is installed on the host machine, both parts can be built by doing:
@@ -75,7 +80,7 @@ lj1036.inktomisearch.com was accessed 1 time(s)
 lj1090.inktomisearch.com was accessed 1 time(s)
 ```
 
-### 2: Option 2 on example_log.txt
+### 2. Option 2 on example_log.txt
 
 ```bash
 make runMyPooledWebLog WEB_LOG_PATH=example_log.txt STATS_OPTION=2
@@ -93,7 +98,7 @@ Actual Output:
 Total bytes transmitted: 512540 byte(s).
 ```
 
-### 3: Option 3 on example_log.txt
+### 3. Option 3 on example_log.txt
 
 ```bash
 make runMyPooledWebLog WEB_LOG_PATH=example_log.txt STATS_OPTION=3
@@ -117,7 +122,7 @@ lj1036.inktomisearch.com transmitted 68 byte(s)
 lj1090.inktomisearch.com transmitted 3860 byte(s)
 ```
 
-### 4: Option 1 on empty_log.txt
+### 4. Option 1 on empty_log.txt
 
 ```bash
 make runMyPooledWebLog WEB_LOG_PATH=empty_log.txt STATS_OPTION=1
@@ -133,7 +138,7 @@ Actual Output:
 ```
 ```
 
-### 5: Option 2 on empty_log.txt
+### 5. Option 2 on empty_log.txt
 
 ```bash
 make runMyPooledWebLog WEB_LOG_PATH=empty_log.txt STATS_OPTION=2
@@ -189,7 +194,7 @@ To test the source viewer a known website was passed into the program. Then the 
 
 ### Test Cases
 
-### 1: Word in website
+### 1. Word in website
 
 ```bash
 make runSourceViewer URL=http://antonious.ca FILTER=George
@@ -211,7 +216,7 @@ Actual Output:
             Under Development | Developed by George Antonious | 2015
 ```
 
-### 2: Word not in website
+### 2. Word not in website
 
 ```bash
 make runSourceViewer URL=http://antonious.ca FILTER=WORDNOTINSITE
