@@ -1,4 +1,7 @@
-package part1;
+package part1.analyzers;
+
+import part1.WebLog;
+import part1.WebLogEntry;
 
 import java.io.PrintStream;
 import java.util.LinkedHashMap;
@@ -7,31 +10,31 @@ import java.util.Map;
 /**
  * Created by George on 2017-12-25.
  */
-public class TotalBytesByHostLogAnalyzer implements ILogAnalyzer {
+public class AccessesLogAnalyzer implements ILogAnalyzer {
     private PrintStream outputPrintStream;
 
-    public TotalBytesByHostLogAnalyzer(PrintStream outputPrintStream) {
+    public AccessesLogAnalyzer(PrintStream outputPrintStream) {
         this.outputPrintStream = outputPrintStream;
     }
 
     @Override
     public void analyzeWebLog(WebLog webLog) {
-        LinkedHashMap<String, Integer> bytesByHost = new LinkedHashMap<>();
+        LinkedHashMap<String, Integer> accessesByHost = new LinkedHashMap<>();
 
         for (WebLogEntry webLogEntry: webLog.getEntries()) {
             String remoteHost = webLogEntry.getRemoteHostIpAddress();
-            int lastTotalBytes = bytesByHost.getOrDefault(remoteHost, 0);
-            bytesByHost.put(remoteHost, lastTotalBytes + webLogEntry.getBytesTransmitted());
+            int lastCount = accessesByHost.getOrDefault(remoteHost, 0);
+            accessesByHost.put(remoteHost, lastCount + 1);
         }
 
-        printOutAnalysisFor(bytesByHost);
+        printOutAnalysisFor(accessesByHost);
     }
 
     private void printOutAnalysisFor(LinkedHashMap<String, Integer> accessesByHost) {
         for (Map.Entry<String, Integer> analysisEntry : accessesByHost.entrySet()) {
             String hostName = analysisEntry.getKey();
             Integer count = analysisEntry.getValue();
-            outputPrintStream.println(String.format("%s transmitted %d byte(s)", hostName, count));
+            outputPrintStream.println(String.format("%s was accessed %d time(s)", hostName, count));
         }
     }
 }

@@ -1,5 +1,10 @@
 package part1;
 
+import part1.analyzers.AccessesLogAnalyzer;
+import part1.analyzers.ILogAnalyzer;
+import part1.analyzers.TotalBytesByHostLogAnalyzer;
+import part1.analyzers.TotalBytesTransmittedLogAnalyzer;
+
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;

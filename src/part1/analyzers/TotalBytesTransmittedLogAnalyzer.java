@@ -1,4 +1,7 @@
-package part1;
+package part1.analyzers;
+
+import part1.WebLog;
+import part1.analyzers.ILogAnalyzer;
 
 import java.io.PrintStream;
 
