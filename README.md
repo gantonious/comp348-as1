@@ -34,10 +34,6 @@ The weblog file is modeled in code as a `WebLog` which contains a list of `WebLo
 
 Rather than coupling the application to the original use cases disucssed in the assignment I went for a more generic approach. I introuduced the concept of an `ILogAnalyzer`. This interface has one simple method:
 
-### Test Plan
-
-To the test the weblog a known weblog was used as input for the program. This weblog is packaged with this assignmnet. Each different option was tested using the same log file to check if the output made sense.
-
 ```java
 void analyzeWebLog(WebLog webLog);
 ```
@@ -48,6 +44,127 @@ It accepts a weblog and can run any procedure on it. For this assignment three d
 - `TotalBytesTransmittedLogAnalyzer`
 
 The main file then creates `Map` that maps the different command line arugements to the different log analyzer implementations. This would allow this program to be expanded to analyze different stats in the web log such as percentage of server errors (i.e HTTP 500) when handling requests.
+
+### Test Plan
+
+To the test the weblog a known weblog was used as input for the program. This weblog is packaged with this assignmnet. Each different option was tested using the same log file to check if the output made sense.
+
+### Test Cases
+
+### 1. Option 1 on example_log.txt
+
+```bash
+make runMyPooledWebLog WEB_LOG_PATH=example_log.txt STATS_OPTION=1
+```
+
+Expected Output:
+
+```
+64.242.88.10 was accessed 47 time(s)
+lordgun.org was accessed 1 time(s)
+lj1036.inktomisearch.com was accessed 1 time(s)
+lj1090.inktomisearch.com was accessed 1 time(s)
+```
+
+Actual Output:
+
+```
+64.242.88.10 was accessed 47 time(s)
+lordgun.org was accessed 1 time(s)
+lj1036.inktomisearch.com was accessed 1 time(s)
+lj1090.inktomisearch.com was accessed 1 time(s)
+```
+
+### 2: Option 2 on example_log.txt
+
+```bash
+make runMyPooledWebLog WEB_LOG_PATH=example_log.txt STATS_OPTION=2
+```
+
+Expected Output:
+
+```
+Total bytes transmitted: 512540 byte(s).
+```
+
+Actual Output:
+
+```
+Total bytes transmitted: 512540 byte(s).
+```
+
+### 3: Option 3 on example_log.txt
+
+```bash
+make runMyPooledWebLog WEB_LOG_PATH=example_log.txt STATS_OPTION=3
+```
+
+Expected Output:
+
+```
+64.242.88.10 transmitted 505743 byte(s)
+lordgun.org transmitted 2869 byte(s)
+lj1036.inktomisearch.com transmitted 68 byte(s)
+lj1090.inktomisearch.com transmitted 3860 byte(s)
+```
+
+Actual Output:
+
+```
+64.242.88.10 transmitted 505743 byte(s)
+lordgun.org transmitted 2869 byte(s)
+lj1036.inktomisearch.com transmitted 68 byte(s)
+lj1090.inktomisearch.com transmitted 3860 byte(s)
+```
+
+### 4: Option 1 on empty_log.txt
+
+```bash
+make runMyPooledWebLog WEB_LOG_PATH=empty_log.txt STATS_OPTION=1
+```
+
+Expected Output:
+
+```
+```
+
+Actual Output:
+
+```
+```
+
+### 5: Option 2 on empty_log.txt
+
+```bash
+make runMyPooledWebLog WEB_LOG_PATH=empty_log.txt STATS_OPTION=2
+```
+
+Expected Output:
+
+```
+```
+
+Actual Output:
+
+```
+```
+
+### 6. Option 3 on empty_log.txt
+
+```bash
+make runMyPooledWebLog WEB_LOG_PATH=empty_log.txt STATS_OPTION=3
+```
+
+Expected Output:
+
+```
+```
+
+Actual Output:
+
+```
+```
+
 
 ## Part 2: SourceViewer
 
@@ -70,9 +187,9 @@ For this part I opened up a stream to the requested website and used a `Buffered
 
 To test the source viewer a known website was passed into the program. Then the matched lines were compared with the source of the website to make sure the program did not miss any lines.
 
-Test Cases:
+### Test Cases
 
-1) Word in website.
+### 1: Word in website
 
 ```bash
 make runSourceViewer URL=http://antonious.ca FILTER=George
@@ -94,7 +211,7 @@ Actual Output:
             Under Development | Developed by George Antonious | 2015
 ```
 
-2) Word not in website.
+### 2: Word not in website
 
 ```bash
 make runSourceViewer URL=http://antonious.ca FILTER=WORDNOTINSITE
