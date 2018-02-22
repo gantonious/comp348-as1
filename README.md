@@ -34,6 +34,10 @@ The weblog file is modeled in code as a `WebLog` which contains a list of `WebLo
 
 Rather than coupling the application to the original use cases disucssed in the assignment I went for a more generic approach. I introuduced the concept of an `ILogAnalyzer`. This interface has one simple method:
 
+### Test Plan
+
+To the test the weblog a known weblog was used as input for the program. This weblog is packaged with this assignmnet. Each different option was tested using the same log file to check if the output made sense.
+
 ```java
 void analyzeWebLog(WebLog webLog);
 ```
@@ -61,3 +65,47 @@ make runSourceViewer URL=[url] FILTER=[filter]
 ### Design
 
 For this part I opened up a stream to the requested website and used a `BufferedReader` to consume the website data line by line. I would then apply the filter to each line to check if the line should be included in the output. For all the lines that include the filter string I then highlight the filter string (similar to what grep does) using unix color escape sequences.
+
+### Test Plan
+
+To test the source viewer a known website was passed into the program. Then the matched lines were compared with the source of the website to make sure the program did not miss any lines.
+
+Test Cases:
+
+1) Word in website.
+
+```bash
+make runSourceViewer URL=http://antonious.ca FILTER=George
+```
+
+Excpected Output:
+
+```
+    <meta name="description" content="George Antonious's Personal Website">
+            <p style="font-size: 225%;">Hey I'm George Antonious</p>
+            Under Development | Developed by George Antonious | 2015
+```
+
+Actual Output:
+
+```
+    <meta name="description" content="George Antonious's Personal Website">
+            <p style="font-size: 225%;">Hey I'm George Antonious</p>
+            Under Development | Developed by George Antonious | 2015
+```
+
+2) Word not in website.
+
+```bash
+make runSourceViewer URL=http://antonious.ca FILTER=WORDNOTINSITE
+```
+
+Excpected Output:
+
+```
+```
+
+Actual Output:
+
+```
+```
