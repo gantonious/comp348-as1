@@ -1,4 +1,4 @@
-PACKAGE_NAME = as1
+PACKAGE_NAME = comp346_as1_3364768
 
 SOURCE_PATH = ./src
 OUTPUT_PATH = ./out/production/as1
@@ -30,6 +30,6 @@ clean:
 
 package:
 	@mkdir -p $(PACKAGE_NAME)
-	@cp -r Makefile $(SOURCE_PATH) *.md $(PACKAGE_NAME)/
+	@cp -r Makefile $(SOURCE_PATH) *.md *.txt $(PACKAGE_NAME)/
 	@zip -r $(PACKAGE_NAME).zip $(PACKAGE_NAME)/
 	@rm -rf $(PACKAGE_NAME)
