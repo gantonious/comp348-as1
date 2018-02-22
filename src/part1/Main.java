@@ -26,6 +26,7 @@ public class Main {
 
         try {
             runProgram(args);
+            System.exit(0);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
